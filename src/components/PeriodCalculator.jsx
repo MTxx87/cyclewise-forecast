@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CalendarIcon } from "lucide-react"
-import { format, addDays } from 'date-fns';
+import { format, addDays, isValid, parseISO } from 'date-fns';
 
 const PeriodCalculator = () => {
   const [lastPeriodStart, setLastPeriodStart] = useState('');
@@ -12,7 +12,11 @@ const PeriodCalculator = () => {
   const [results, setResults] = useState(null);
 
   const calculateDates = () => {
-    const startDate = new Date(lastPeriodStart);
+    const startDate = parseISO(lastPeriodStart);
+    if (!isValid(startDate)) {
+      alert("Please enter a valid date for your last period start.");
+      return;
+    }
     const ovulationDate = addDays(startDate, cycleDuration - 14);
     const nextPeriodStart = addDays(startDate, cycleDuration);
     const nextPeriodEnd = addDays(nextPeriodStart, periodDuration - 1);
@@ -22,6 +26,10 @@ const PeriodCalculator = () => {
       nextPeriodStart,
       nextPeriodEnd,
     });
+  };
+
+  const formatDate = (date) => {
+    return isValid(date) ? format(date, 'MMM d') : 'Invalid Date';
   };
 
   return (
@@ -56,7 +64,7 @@ const PeriodCalculator = () => {
                 type="number"
                 id="periodDuration"
                 value={periodDuration}
-                onChange={(e) => setPeriodDuration(parseInt(e.target.value))}
+                onChange={(e) => setPeriodDuration(parseInt(e.target.value) || 1)}
                 className="text-center"
               />
               <Button onClick={() => setPeriodDuration(periodDuration + 1)}>+</Button>
@@ -72,7 +80,7 @@ const PeriodCalculator = () => {
                 type="number"
                 id="cycleDuration"
                 value={cycleDuration}
-                onChange={(e) => setCycleDuration(parseInt(e.target.value))}
+                onChange={(e) => setCycleDuration(parseInt(e.target.value) || 1)}
                 className="text-center"
               />
               <Button onClick={() => setCycleDuration(cycleDuration + 1)}>+</Button>
@@ -92,9 +100,7 @@ const PeriodCalculator = () => {
             </CardHeader>
             <CardContent>
               <div className="text-4xl font-bold text-center">
-                {format(results.ovulationDate, 'MMM')}
-                <br />
-                {format(results.ovulationDate, 'd')}
+                {formatDate(results.ovulationDate)}
               </div>
               <Button className="w-full mt-4 bg-pink-500 hover:bg-pink-600">
                 Track your periods
@@ -107,9 +113,7 @@ const PeriodCalculator = () => {
             </CardHeader>
             <CardContent>
               <div className="text-4xl font-bold text-center">
-                {format(results.nextPeriodStart, 'MMM')}-{format(results.nextPeriodEnd, 'MMM')}
-                <br />
-                {format(results.nextPeriodStart, 'd')}-{format(results.nextPeriodEnd, 'd')}
+                {formatDate(results.nextPeriodStart)} - {formatDate(results.nextPeriodEnd)}
               </div>
               <Button className="w-full mt-4 bg-pink-500 hover:bg-pink-600">
                 Track your periods
