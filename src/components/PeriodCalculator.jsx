@@ -59,7 +59,7 @@ const PeriodCalculator = () => {
               How many days did it last?
             </label>
             <div className="flex items-center space-x-4">
-              <Button onClick={() => setPeriodDuration(Math.max(1, periodDuration - 1))}>-</Button>
+              <Button onClick={() => setPeriodDuration(Math.max(1, periodDuration - 1))} className="bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">-</Button>
               <Input
                 type="number"
                 id="periodDuration"
@@ -67,7 +67,7 @@ const PeriodCalculator = () => {
                 onChange={(e) => setPeriodDuration(parseInt(e.target.value) || 1)}
                 className="text-center"
               />
-              <Button onClick={() => setPeriodDuration(periodDuration + 1)}>+</Button>
+              <Button onClick={() => setPeriodDuration(periodDuration + 1)} className="bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">+</Button>
             </div>
           </div>
           <div className="space-y-2">
@@ -75,7 +75,7 @@ const PeriodCalculator = () => {
               Average cycle length (days)
             </label>
             <div className="flex items-center space-x-4">
-              <Button onClick={() => setCycleDuration(Math.max(1, cycleDuration - 1))}>-</Button>
+              <Button onClick={() => setCycleDuration(Math.max(1, cycleDuration - 1))} className="bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">-</Button>
               <Input
                 type="number"
                 id="cycleDuration"
@@ -83,10 +83,10 @@ const PeriodCalculator = () => {
                 onChange={(e) => setCycleDuration(parseInt(e.target.value) || 1)}
                 className="text-center"
               />
-              <Button onClick={() => setCycleDuration(cycleDuration + 1)}>+</Button>
+              <Button onClick={() => setCycleDuration(cycleDuration + 1)} className="bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">+</Button>
             </div>
           </div>
-          <Button onClick={calculateDates} className="w-full bg-pink-500 hover:bg-pink-600">
+          <Button onClick={calculateDates} className="w-full bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">
             See results
           </Button>
         </CardContent>
@@ -102,7 +102,7 @@ const PeriodCalculator = () => {
               <div className="text-4xl font-bold text-center">
                 {formatDate(results.ovulationDate)}
               </div>
-              <Button className="w-full mt-4 bg-pink-500 hover:bg-pink-600">
+              <Button className="w-full mt-4 bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">
                 Track your periods
               </Button>
             </CardContent>
@@ -120,7 +120,7 @@ const PeriodCalculator = () => {
               </Button>
             </CardContent>
           </Card>
-          <Button onClick={() => setResults(null)} className="w-full">
+          <Button onClick={() => setResults(null)} className="w-full bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">
             Start over
           </Button>
         </div>
