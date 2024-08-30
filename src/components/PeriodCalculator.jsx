@@ -118,28 +118,26 @@ const PeriodCalculator = () => {
 
       {results && !isLoading && (
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Your estimated ovulation date</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-4xl text-center text-[#5f5f5f]">
-                  {formatDate(results.ovulationDate)}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Your estimated period dates are</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-4xl text-center text-[#5f5f5f]">
-                  {formatDate(results.nextPeriodStart)} - {formatDate(results.nextPeriodEnd)}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <Card className="mb-4">
+            <CardHeader>
+              <CardTitle>Your estimated ovulation date</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-4xl text-center text-[#5f5f5f]">
+                {formatDate(results.ovulationDate)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="mb-4">
+            <CardHeader>
+              <CardTitle>Your estimated period dates are</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-4xl text-center text-[#5f5f5f]">
+                {formatDate(results.nextPeriodStart)} - {formatDate(results.nextPeriodEnd)}
+              </div>
+            </CardContent>
+          </Card>
           <Button onClick={resetCalculator} className="w-full bg-[#72035d] hover:bg-[#5c024b] rounded-[25px]">
             Start over
           </Button>
